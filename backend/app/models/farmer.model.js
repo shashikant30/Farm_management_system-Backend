@@ -12,8 +12,8 @@ const Farmer = function(farmer) {
     this.irrigation_src = farmer.irrigation_src;
     this.f_id=farmer.f_id;
   };
-  Farmer.getAll = result => {
-    sql.query("SELECT * FROM farmer WHERE farmer_id=1", (err, res) => {
+  Farmer.getAll = (x, result) => {
+    sql.query(`SELECT * FROM farmer where farmer_id=${x}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -26,6 +26,18 @@ const Farmer = function(farmer) {
   };
   Farmer.getA = result => {
     sql.query("SELECT * FROM farm JOIN farm_info ON farm.farm_id = farm_info.farm_id WHERE farmer_id=2", (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+  
+      console.log("farm: ", res);
+      result(null, res);
+    });
+  };
+   Farmer.login = (username, password, result)=> {
+    sql.query(`SELECT farmer_id FROM farmer WHERE farmer_fname="${username}" AND password="${password}"`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
