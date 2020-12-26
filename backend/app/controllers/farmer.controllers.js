@@ -10,7 +10,7 @@ exports.findAll = (req, res) => {
     });
   };
 exports.findA = (req, res) => {
-    Farmer.getA((err, data) => {
+    Farmer.getA(req.params.x, (err, data) => {
       if (err)
         res.status(500).send({
           message:

@@ -24,8 +24,8 @@ const Farmer = function(farmer) {
       result(null, res);
     });
   };
-  Farmer.getA = result => {
-    sql.query("SELECT * FROM farm JOIN farm_info ON farm.farm_id = farm_info.farm_id WHERE farmer_id=2", (err, res) => {
+  Farmer.getA = (x, result) => {
+    sql.query(`SELECT * FROM farm JOIN farm_info ON farm.farm_id = farm_info.farm_id WHERE farmer_id=${x}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
