@@ -13,7 +13,7 @@ const Farmer = function(farmer) {
     this.f_id=farmer.f_id;
   };
   Farmer.getAll = (x, result) => {
-    sql.query(`SELECT * FROM farmer where farmer_id=${x}`, (err, res) => {
+    sql.query(`SELECT * FROM farmer where f_id=${x}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -37,7 +37,7 @@ const Farmer = function(farmer) {
     });
   };
    Farmer.login = (username, password, result)=> {
-    sql.query(`SELECT farmer_id FROM farmer WHERE farmer_fname="${username}" AND password="${password}"`, (err, res) => {
+    sql.query(`SELECT F_id FROM farmer WHERE F_id="${username}" AND F_password="${password}"`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
