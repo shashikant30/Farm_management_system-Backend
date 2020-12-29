@@ -102,3 +102,23 @@ exports.findSeeds = (req, res) => {
       else res.send(data);
     });
   };
+  exports.addFarm = (req, res) => {
+    Farmer.addfarm(req.params.farm_id,req.params.f_id,req.params.farm_area,req.params.farm_location,req.params.farm_irrigation_src, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };
+  exports.updateFarm = (req, res) => {
+    Farmer.updatefarm(req.params.a,req.params.b,req.params.c,req.params.d,req.params.e, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };

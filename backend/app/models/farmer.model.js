@@ -142,4 +142,38 @@ Farmer.getSeeds = (f_id,result) => {
     });
   };
 
+  Farmer.addfarm = (farm_id,f_id,farm_area,farm_location,farm_irrigation_src,result) => {
+    sql.query(`INSERT INTO farm VALUES(${f_id},${farm_id})`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+     // console.log("farmers: ", res);
+     // result(null, res);
+    });
+   
+    sql.query(`INSERT INTO farm_info VALUES(${farm_id},'${farm_area}','${farm_location}','${farm_irrigation_src}')`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+
+  Farmer.updatefarm = (a,b,c,d,e,result) => {
+    sql.query(`UPDATE farm_info SET Farm_area='${c}',Farm_location='${d}',Farm_irrigation_source='${e}' WHERE Farm_id=${a}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+
   module.exports = Farmer;
