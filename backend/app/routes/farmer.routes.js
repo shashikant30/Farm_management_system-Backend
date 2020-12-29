@@ -12,4 +12,5 @@ module.exports = app => {
     app.get("/Seeds/:f_id", farmers.findSeeds);
     app.post("/farm_info/add/:farm_id/:f_id/:farm_area/:farm_location/:farm_irrigation_src", farmers.addFarm);
     app.post("/farm/update/:a/:b/:c/:d/:e", farmers.updateFarm);
+    app.delete("/farm/delete/:farm_id", farmers.deleteFarm);
 };

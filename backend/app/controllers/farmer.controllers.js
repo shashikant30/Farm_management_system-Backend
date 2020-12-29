@@ -9,6 +9,8 @@ const Farmer = require("../models/farmer.model.js");
       else res.send(data);
     });
   };
+
+
   exports.findFarmer = (req, res) => {
     Farmer.getFarmer(req.params.f_id, (err, data) => {
       if (err)
@@ -20,7 +22,8 @@ const Farmer = require("../models/farmer.model.js");
     });
   };
 
-exports.findFarm = (req, res) => {
+
+  exports.findFarm = (req, res) => {
     Farmer.getFarm(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -31,7 +34,8 @@ exports.findFarm = (req, res) => {
     });
   };
 
-exports.findCrop = (req, res) => {
+
+  exports.findCrop = (req, res) => {
     Farmer.getCrop(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -42,7 +46,8 @@ exports.findCrop = (req, res) => {
     });
   };
 
-exports.findWarehouse = (req, res) => {
+
+  exports.findWarehouse = (req, res) => {
     Farmer.getWarehouse(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -52,7 +57,9 @@ exports.findWarehouse = (req, res) => {
       else res.send(data);
     });
   };
-exports.findCropmarket = (req, res) => {
+  
+  
+  exports.findCropmarket = (req, res) => {
     Farmer.getCropmarket(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -62,7 +69,9 @@ exports.findCropmarket = (req, res) => {
       else res.send(data);
     });
   };
-exports.findlabourers = (req, res) => {
+  
+  
+  exports.findlabourers = (req, res) => {
     Farmer.getlabourers(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -72,7 +81,9 @@ exports.findlabourers = (req, res) => {
       else res.send(data);
     });
   };
-exports.findPesticides = (req, res) => {
+  
+  
+  exports.findPesticides = (req, res) => {
     Farmer.getPesticides(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -82,7 +93,9 @@ exports.findPesticides = (req, res) => {
       else res.send(data);
     });
   };
-exports.findFertilizers = (req, res) => {
+  
+  
+  exports.findFertilizers = (req, res) => {
     Farmer.getFertilizers(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -92,7 +105,9 @@ exports.findFertilizers = (req, res) => {
       else res.send(data);
     });
   };
-exports.findSeeds = (req, res) => {
+  
+  
+  exports.findSeeds = (req, res) => {
     Farmer.getSeeds(req.params.f_id, (err, data) => {
       if (err)
         res.status(500).send({
@@ -102,6 +117,8 @@ exports.findSeeds = (req, res) => {
       else res.send(data);
     });
   };
+  
+  
   exports.addFarm = (req, res) => {
     Farmer.addfarm(req.params.farm_id,req.params.f_id,req.params.farm_area,req.params.farm_location,req.params.farm_irrigation_src, (err, data) => {
       if (err)
@@ -112,6 +129,8 @@ exports.findSeeds = (req, res) => {
       else res.send(data);
       });
   };
+  
+  
   exports.updateFarm = (req, res) => {
     Farmer.updatefarm(req.params.a,req.params.b,req.params.c,req.params.d,req.params.e, (err, data) => {
       if (err)
@@ -120,5 +139,16 @@ exports.findSeeds = (req, res) => {
             err.message || "Some error occurred while retrieving Pesticides information."
         });
       else res.send(data);
+      });
+  };
+  
+  
+  exports.deleteFarm = (req, res) => {
+    Farmer.deletefarm(req.params.farm_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
       });
   };

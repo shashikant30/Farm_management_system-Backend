@@ -1,18 +1,7 @@
 const sql = require("./db.js");
-const Farmer = function(farmer) {
-    this.farmer_id=farmer.farmer_id;
-    this.farmer_fname = farmer.farmer_fname;
-    this.farmer_mname = farmer.farmer_mname;
-    this.farmer_lname = farmer.farmer_lname;
-    this.address = farmer.address;
-    this.contact = farmer.contact;
-    this.farm_id = farmer.farm_id;
-    this.area = farmer.area;
-    this.location = farmer.location;
-    this.irrigation_src = farmer.irrigation_src;
-    this.f_id=farmer.f_id;
-  };
-   Farmer.login = (username, password, result)=> {
+const Farmer = function(farmer) {};
+  
+  Farmer.login = (username, password, result)=> {
     sql.query(`SELECT F_id FROM farmer WHERE F_id="${username}" AND F_password="${password}"`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -24,6 +13,7 @@ const Farmer = function(farmer) {
       result(null, res);
     });
   };
+  
   Farmer.getFarmer = (f_id,result) => {
     sql.query(`SELECT * FROM farmer WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
@@ -36,7 +26,6 @@ const Farmer = function(farmer) {
     });
   };
 
-  
   Farmer.getFarm = (f_id,result) => {
     sql.query(`SELECT * FROM farm NATURAL JOIN farm_info WHERE f_id = ${f_id} `, (err, res) => {
       if (err) {
@@ -61,7 +50,7 @@ const Farmer = function(farmer) {
     });
   };
   
-Farmer.getWarehouse = (f_id,result) => {
+  Farmer.getWarehouse = (f_id,result) => {
     sql.query(`SELECT * FROM Stored_in NATURAL JOIN Warehouse NATURAL JOIN Produces WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -73,7 +62,7 @@ Farmer.getWarehouse = (f_id,result) => {
     });
   };
 
-Farmer.getCropmarket = (f_id,result) => {
+  Farmer.getCropmarket = (f_id,result) => {
     sql.query(`SELECT * FROM Solds_in NATURAL JOIN Crop_market WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -85,7 +74,7 @@ Farmer.getCropmarket = (f_id,result) => {
     });
   };
 
-Farmer.getlabourers = (f_id,result) => {
+  Farmer.getlabourers = (f_id,result) => {
     sql.query(`SELECT * FROM labourers NATURAL JOIN labourers_info WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -96,7 +85,8 @@ Farmer.getlabourers = (f_id,result) => {
       result(null, res);
     });
   };
-Farmer.getPesticides = (f_id,result) => {
+  
+  Farmer.getPesticides = (f_id,result) => {
     sql.query(`SELECT * FROM maintain NATURAL JOIN Pesticides_info WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -108,7 +98,7 @@ Farmer.getPesticides = (f_id,result) => {
     });
   };
 
-Farmer.getFertilizers = (f_id,result) => {
+  Farmer.getFertilizers = (f_id,result) => {
     sql.query(`SELECT * FROM maintain NATURAL JOIN Fertilizers_info WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -119,18 +109,8 @@ Farmer.getFertilizers = (f_id,result) => {
       result(null, res);
     });
   };
-Farmer.getSeeds = (f_id,result) => {
-    sql.query(`SELECT * FROM maintain NATURAL JOIN Seeds_info WHERE f_id = ${f_id}`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-      console.log("farmers: ", res);
-      result(null, res);
-    });
-  };
-Farmer.getSeeds = (f_id,result) => {
+  
+  Farmer.getSeeds = (f_id,result) => {
     sql.query(`SELECT * FROM maintain NATURAL JOIN Seeds_info WHERE f_id = ${f_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -152,7 +132,6 @@ Farmer.getSeeds = (f_id,result) => {
      // console.log("farmers: ", res);
      // result(null, res);
     });
-   
     sql.query(`INSERT INTO farm_info VALUES(${farm_id},'${farm_area}','${farm_location}','${farm_irrigation_src}')`, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -175,5 +154,18 @@ Farmer.getSeeds = (f_id,result) => {
       result(null, res);
     });
   };
+
+  Farmer.deletefarm = (farmer_id,result) => {
+    sql.query(`DELETE FROM farm_info WHERE Farm_id=${farmer_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+
 
   module.exports = Farmer;
