@@ -118,16 +118,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addfarm = (farm_id,f_id,farm_area,farm_location,farm_irrigation_src,result) => {
-    sql.query(`INSERT INTO farm VALUES(${f_id},${farm_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO farm_info VALUES(${farm_id},'${farm_area}','${farm_location}','${farm_irrigation_src}')`, (err, res) => {
+    sql.query(`INSERT INTO farm_info VALUES(null,'${farm_area}','${farm_location}','${farm_irrigation_src}');INSERT INTO farm VALUES(${f_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -162,16 +153,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addcrop = (crop_id,crop_name,crop_quantity,farm_id,farmer_id,result) => {
-    sql.query(`INSERT INTO produces VALUES(${farmer_id},${crop_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO crop_allocation VALUES(${crop_id},'${crop_name}','${crop_quantity}',${farm_id})`, (err, res) => {
+    sql.query(`INSERT INTO crop_allocation VALUES(${crop_id},'${crop_name}','${crop_quantity}',${farm_id});INSERT INTO produces VALUES(${farmer_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -206,16 +188,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addmarket = (crop_market_id, crop_id, crop_category, market_name, market_district, market_unit, crop_quantity, crop_price, date_of_sold, crop_name, warehouse_id, farmer_id, result) => {
-    sql.query(`INSERT INTO solds_in VALUES(${farmer_id},${crop_market_id},${warehouse_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO crop_market VALUES(${crop_market_id},${crop_id},'${crop_category}','${market_name}','${market_district}','${market_unit}','${crop_quantity}',${crop_price},'${date_of_sold}','${crop_name}')`, (err, res) => {
+    sql.query(`INSERT INTO crop_market VALUES(${crop_market_id},${crop_id},'${crop_category}','${market_name}','${market_district}','${market_unit}','${crop_quantity}',${crop_price},'${date_of_sold}','${crop_name}');INSERT INTO solds_in VALUES(${farmer_id},(SELECT LAST_INSERT_ID()),${warehouse_id})`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -250,16 +223,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addlabour = (labour_id,l_fname,l_mname,l_lname,l_address,l_phone,l_telephone,work,working_hours,salary,l_city,crop_id,farmer_id, result) => {
-    sql.query(`INSERT INTO labourers VALUES(${farmer_id},${labour_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO labourers_info VALUES(${labour_id},'${l_fname}','${l_lname}','${l_mname}','${l_address}','${l_phone}','${l_telephone}','${work}',${working_hours},${salary},'${l_city}',${crop_id})`, (err, res) => {
+    sql.query(`INSERT INTO labourers_info VALUES(${labour_id},'${l_fname}','${l_lname}','${l_mname}','${l_address}','${l_phone}','${l_telephone}','${work}',${working_hours},${salary},'${l_city}',${crop_id});INSERT INTO labourers VALUES(${farmer_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -294,16 +258,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addwarehouse = (warehouse_id,crop_name,crop_stored_quantity,total_capacity,crop_id, result) => {
-    sql.query(`INSERT INTO stored_in VALUES(${crop_id},${warehouse_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO warehouse VALUES(${warehouse_id},'${crop_name}','${crop_stored_quantity}','${total_capacity}')`, (err, res) => {
+    sql.query(`INSERT INTO warehouse VALUES(${warehouse_id},'${crop_name}','${crop_stored_quantity}','${total_capacity}');INSERT INTO stored_in VALUES(${crop_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -338,16 +293,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addpesticide = (pesticide_id,pesticide_name,pesticide_rate,pesticide_quantity,company_name,formulation,fertilizer_id,seed_id,farmer_id, result) => {
-    sql.query(`INSERT INTO maintain VALUES(${farmer_id},${pesticide_id},${fertilizer_id},${seed_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO Pesticides_info VALUES(${pesticide_id},'${pesticide_name}',${pesticide_rate},'${pesticide_quantity}','${company_name}','${formulation}')`, (err, res) => {
+    sql.query(`INSERT INTO Pesticides_info VALUES(${pesticide_id},'${pesticide_name}',${pesticide_rate},'${pesticide_quantity}','${company_name}','${formulation}');INSERT INTO maintain VALUES(${farmer_id},(SELECT LAST_INSERT_ID()),${fertilizer_id},${seed_id})`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -382,16 +328,7 @@ const Farmer = function(farmer) {};
 
 
   Farmer.addfertilizer = (pesticide_id,fertilizer_name,fertilizer_rate,fertilizer_quantity,crop_id,company_name,formulation,fertilizer_id,seed_id,farmer_id, result) => {
-    sql.query(`INSERT INTO maintain VALUES(${farmer_id},${pesticide_id},${fertilizer_id},${seed_id})`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-     // console.log("farmers: ", res);
-     // result(null, res);
-    });
-    sql.query(`INSERT INTO Fertilizers_info VALUES(${fertilizer_id},'${fertilizer_name}',${fertilizer_rate},'${fertilizer_quantity}',${crop_id},'${company_name}','${formulation}')`, (err, res) => {
+    sql.query(`INSERT INTO Fertilizers_info VALUES(${fertilizer_id},'${fertilizer_name}',${fertilizer_rate},'${fertilizer_quantity}',${crop_id},'${company_name}','${formulation}');INSERT INTO maintain VALUES(${farmer_id},${pesticide_id},(SELECT LAST_INSERT_ID()),${seed_id})`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -423,6 +360,41 @@ const Farmer = function(farmer) {};
       result(null, res);
     });
   };
+
+
+  Farmer.addseed = (seed_id,seed_name,seed_type,seed_category,seed_rate,seed_quantity,company_name,pesticide_id,fertilizer_id,farmer_id, result) => {
+     sql.query(`INSERT INTO Seeds_info VALUES(${seed_id},'${seed_name}','${seed_type}','${seed_category}',${seed_rate},'${seed_quantity}','${company_name}');INSERT INTO maintain VALUES(${farmer_id},${pesticide_id},${fertilizer_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
+       if (err) {
+         console.log("error: ", err);
+         result(null, err);
+         return;
+       }
+       console.log("farmers: ", res);
+       result(null, res);
+     });
+   };
+   Farmer.updateseed = (seed_id,seed_name,seed_rate,seed_quantity,seed_type,seed_category,company_name,pesticide_id,fertilizer_id,farmer_id, result) => {
+     sql.query(`UPDATE Seeds_info SET Seed_name='${seed_name}',Seed_type='${seed_type}',Seed_category='${seed_category}',Seed_rate=${seed_rate},Seed_quantity='${seed_quantity}',Company_name='${company_name}' WHERE Seed_id=${seed_id}`, (err, res) => {
+       if (err) {
+         console.log("error: ", err);
+         result(null, err);
+         return;
+       }
+       console.log("farmers: ", res);
+       result(null, res);
+     });
+   };
+   Farmer.deleteseed = (seed_id,result) => {
+     sql.query(`DELETE FROM Seeds_info WHERE Seed_id=${seed_id}`, (err, res) => {
+       if (err) {
+         console.log("error: ", err);
+         result(null, err);
+         return;
+       }
+       console.log("farmers: ", res);
+       result(null, res);
+     });
+   };
 
 
   module.exports = Farmer;

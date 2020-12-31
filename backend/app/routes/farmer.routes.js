@@ -38,4 +38,9 @@ module.exports = app => {
     app.post("/fertilizers/add/:pesticide_id/:fertilizer_name/:fertilizer_rate/:fertilizer_quantity/:crop_id/:company_name/:formulation/:fertilizer_id/:seed_id/:farmer_id", farmers.addFertilizer);
     app.post("/fertilizers/update/:pesticide_id/:fertilizer_name/:fertilizer_rate/:fertilizer_quantity/:crop_id/:company_name/:formulation/:fertilizer_id/:seed_id/:farmer_id", farmers.updateFertilizer);
     app.delete("/fertilizers/delete/:fertilizer_id", farmers.deleteFertilizer);
+
+    app.post("/seeds/add/:seed_id/:seed_name/:seed_type/:seed_category/:seed_rate/:seed_quantity/:company_name/:pesticide_id/:fertilizer_id/:farmer_id", farmers.addSeed);
+    app.post("/seeds/update/:seed_id/:seed_name/:seed_type/:seed_category/:seed_rate/:seed_quantity/:company_name/:pesticide_id/:fertilizer_id/:farmer_id", farmers.updateSeed);
+    app.delete("/seeds/delete/:Seed_id", farmers.deleteSeed);
+
 };

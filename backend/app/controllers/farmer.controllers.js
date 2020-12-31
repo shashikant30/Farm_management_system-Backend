@@ -330,3 +330,35 @@ const Farmer = require("../models/farmer.model.js");
         else res.send(data);
       });
   };
+
+
+  exports.addSeed = (req, res) => {
+    Farmer.addseed(req.params.seed_id,req.params.seed_name,req.params.seed_type,req.params.seed_category,req.params.seed_rate,req.params.seed_quantity,req.params.company_name,req.params.pesticide_id,req.params.fertilizer_id,req.params.farmer_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };
+  exports.updateSeed = (req, res) => {
+    Farmer.updateseed(req.params.seed_id,req.params.seed_name,req.params.seed_type,req.params.seed_category,req.params.seed_rate,req.params.seed_quantity,req.params.company_name,req.params.pesticide_id,req.params.fertilizer_id,req.params.farmer_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };
+  exports.deleteSeed = (req, res) => {
+    Farmer.deleteseed(req.params.seed_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+        else res.send(data);
+      });
+  };
