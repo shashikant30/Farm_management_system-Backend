@@ -139,8 +139,8 @@ const Farmer = function(farmer) {};
       result(null, res);
     });
   };
-  Farmer.deletefarm = (farmer_id,result) => {
-    sql.query(`DELETE FROM farm_info WHERE Farm_id=${farmer_id}`, (err, res) => {
+  Farmer.deletefarm = (farm_id,result) => {
+    sql.query(`delete from farm_info where Farm_id=${farm_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
