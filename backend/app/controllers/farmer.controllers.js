@@ -362,3 +362,16 @@ const Farmer = require("../models/farmer.model.js");
         else res.send(data);
       });
   };
+
+
+
+  exports.profitLoss = (req, res) => {
+    Farmer.profitloss(req.params.farmer_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Farmers information."
+        });
+      else res.send(data);
+    });
+  };

@@ -397,4 +397,18 @@ const Farmer = function(farmer) {};
    };
 
 
+
+   Farmer.profitloss = (f_id,result) => {
+    sql.query(`CALL profitLoss(${f_id}); select * from earnings where F_id=${f_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res[1]);
+    });
+  };
+
+
   module.exports = Farmer;
