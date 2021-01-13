@@ -43,4 +43,8 @@ module.exports = app => {
     app.post("/seeds/update/:seed_id/:seed_name/:seed_type/:seed_category/:seed_rate/:seed_quantity/:company_name/:pesticide_id/:fertilizer_id/:farmer_id", farmers.updateSeed);
     app.delete("/seeds/delete/:Seed_id", farmers.deleteSeed);
 
+
+
+    app.get("/overview/profitLoss/:farmer_id/:crop_id", farmers.profitLoss);
+
 };
