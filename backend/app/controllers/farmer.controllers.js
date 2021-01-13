@@ -366,7 +366,7 @@ const Farmer = require("../models/farmer.model.js");
 
 
   exports.profitLoss = (req, res) => {
-    Farmer.profitloss(req.params.farmer_id, (err, data) => {
+    Farmer.profitloss(req.params.farmer_id, req.params.crop_id, (err, data) => {
       if (err)
         res.status(500).send({
           message:

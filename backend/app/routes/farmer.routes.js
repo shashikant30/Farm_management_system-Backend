@@ -45,6 +45,6 @@ module.exports = app => {
 
 
 
-    app.get("/overview/profitLoss/:farmer_id", farmers.profitLoss);
+    app.get("/overview/profitLoss/:farmer_id/:crop_id", farmers.profitLoss);
 
 };
