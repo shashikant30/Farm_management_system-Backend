@@ -99,6 +99,29 @@ const Farmer = require("../models/farmer.model.js");
       else res.send(data);
     });
   };
+
+
+
+  exports.addFarmer = (req, res) => {
+    Farmer.addfarmer(req.params.farmer_id,req.params.f_fname,req.params.f_mname,req.params.f_lname,req.params.f_address,req.params.f_phone,req.params.f_telephone,req.params.f_gender,req.params.f_city,req.params.f_password, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };
+  exports.updateFarmer = (req, res) => {
+    Farmer.updatefarmer(req.params.farmer_id,req.params.f_fname,req.params.f_mname,req.params.f_lname,req.params.f_address,req.params.f_phone,req.params.f_telephone,req.params.f_gender,req.params.f_city,req.params.f_password, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Pesticides information."
+        });
+      else res.send(data);
+      });
+  };
   
   
 

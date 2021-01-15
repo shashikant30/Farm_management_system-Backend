@@ -11,6 +11,9 @@ module.exports = app => {
     app.get("/fertilizers/:f_id", farmers.findFertilizers);
     app.get("/seeds/:f_id", farmers.findSeeds);
 
+    app.post("/farmer/add/:farmer_id/:f_fname/:f_mname/:f_lname/:f_address/:f_phone/:f_telephone/:f_gender/:f_city/:f_password", farmers.addFarmer);
+    app.post("/farmer/update/:farmer_id/:f_fname/:f_mname/:f_lname/:f_address/:f_phone/:f_telephone/:f_gender/:f_city/:f_password", farmers.updateFarmer);
+
     app.post("/farm_info/add/:farm_id/:f_id/:farm_area/:farm_location/:farm_irrigation_src", farmers.addFarm);
     app.post("/farm_info/update/:farm_id/:f_id/:farm_area/:farm_location/:farm_irrigation_src", farmers.updateFarm);
     app.delete("/farm_info/delete/:farm_id", farmers.deleteFarm);

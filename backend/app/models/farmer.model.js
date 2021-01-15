@@ -116,6 +116,30 @@ const Farmer = function(farmer) {};
   };
 
 
+  Farmer.addfarmer = (farmer_id,f_fname,f_mname,f_lname,f_address,f_phone,f_telephone,f_gender,f_city,f_password, result) => {
+    sql.query(`INSERT INTO farmer VALUES(${farmer_id},'${f_fname}','${f_lname}','${f_mname}','${f_address}','${f_phone}','${f_telephone}','${f_gender}','${f_city}','${f_password}')`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+  Farmer.updatefarmer = (farmer_id,f_fname,f_mname,f_lname,f_address,f_phone,f_telephone,f_gender,f_city,f_password, result) => {
+    sql.query(`UPDATE farmer SET F_fname='${f_fname}',F_lname='${f_lname}',F_mname='${f_mname}',F_address='${f_address}',F_phoneNo='${f_phone}',F_telephoneNo='${f_telephone}',F_gender='${f_gender}',F_city='${f_city}',F_password='${f_password}' WHERE F_id=${farmer_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+
+
 
   Farmer.addfarm = (farm_id,f_id,farm_area,farm_location,farm_irrigation_src,result) => {
     sql.query(`INSERT INTO farm_info VALUES(null,'${farm_area}','${farm_location}','${farm_irrigation_src}');INSERT INTO farm VALUES(${f_id},(SELECT LAST_INSERT_ID()))`, (err, res) => {
