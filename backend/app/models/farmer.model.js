@@ -410,5 +410,21 @@ const Farmer = function(farmer) {};
     });
   };
 
+  Farmer.cropbalance = (crop_id,result) => {
+    sql.query(`SELECT Crop_stored_quantity
+              FROM warehouse
+              WHERE Warehouse_id=( SELECT max(Warehouse_id)
+                                    From stored_in
+                                    WHERE stored_in.Crop_id=${crop_id} )`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("farmers: ", res);
+      result(null, res);
+    });
+  };
+
 
   module.exports = Farmer;

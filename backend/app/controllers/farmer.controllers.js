@@ -375,3 +375,13 @@ const Farmer = require("../models/farmer.model.js");
       else res.send(data);
     });
   };
+  exports.cropBalance = (req, res) => {
+    Farmer.cropbalance(req.params.crop_id, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Farmers information."
+        });
+      else res.send(data);
+    });
+  };

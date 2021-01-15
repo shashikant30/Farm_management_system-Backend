@@ -46,5 +46,5 @@ module.exports = app => {
 
 
     app.get("/overview/profitLoss/:farmer_id/:crop_id", farmers.profitLoss);
-
+    app.get("/overview/cropbalance/:crop_id", farmers.cropBalance);
 };
